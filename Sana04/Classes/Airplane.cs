@@ -15,8 +15,8 @@ namespace Sana04.Classes
 
         public Airplane()
         {
-            StartCity = "Початкове місце";
-            FinishCity = "Кінцеве місце";
+            StartCity = "Місто відправлення";
+            FinishCity = "Місто прибуття";
             StartDate = new MyDate();
             FinishDate = new MyDate();
         }
