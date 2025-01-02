@@ -12,6 +12,12 @@ namespace Sana04.Classes
         protected string Name;
         protected double ExRate;
 
+        public Currency()
+        {
+            Name = "UAH";
+            ExRate = 1.0;
+        }
+
         public Currency(string name, double exRate)
         {
             SetName(name);
@@ -26,30 +32,20 @@ namespace Sana04.Classes
 
         public void SetName(string name)
         {
-            if (name == null || name.Length == 0)
-            {
+            if (string.IsNullOrEmpty(name))
                 throw new Exception("Currency name is empty!");
-            }
             Name = name;
         }
 
         public void SetExRate(double exRate)
         {
             if (exRate <= 0)
-            {
                 throw new Exception("Exchange rate must be positive!");
-            }
             ExRate = exRate;
         }
 
-        public string GetName()
-        {
-            return Name;
-        }
-
-        public double GetExRate()
-        {
-            return ExRate;
-        }
+        public string GetName() { return Name; }
+        public double GetExRate() { return ExRate; }
     }
 }
+

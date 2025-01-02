@@ -25,8 +25,8 @@ namespace Sana04.Classes
         {
             SetStartCity(startCity);
             SetFinishCity(finishCity);
-            SetStartDate(startDate);
-            SetFinishDate(finishDate);
+            SetStartDate(new MyDate(startDate));
+            SetFinishDate(new MyDate(finishDate));
         }
 
         public Airplane(Airplane other)
@@ -39,55 +39,45 @@ namespace Sana04.Classes
 
         public void SetStartCity(string startCity)
         {
-            if (startCity == null || startCity.Length == 0)
-            {
+            if (string.IsNullOrEmpty(startCity))
                 throw new Exception("StartCity is empty!");
-            }
-            else
-            {
-                StartCity = startCity;
-            }
+            StartCity = startCity;
         }
 
         public void SetFinishCity(string finishCity)
         {
-            if (finishCity == null || finishCity.Length == 0)
-            {
+            if (string.IsNullOrEmpty(finishCity))
                 throw new Exception("FinishCity is empty!");
-            }
-            else
-            {
-                FinishCity = finishCity;
-            }
+            FinishCity = finishCity;
         }
 
         public void SetStartDate(MyDate startDate)
         {
-            StartDate = startDate;
+            StartDate = new MyDate(startDate);
         }
 
         public void SetFinishDate(MyDate finishDate)
         {
-            FinishDate = finishDate;
+            FinishDate = new MyDate(finishDate);
         }
 
         public string GetStartCity() { return StartCity; }
         public string GetFinishCity() { return FinishCity; }
         public MyDate GetStartDate() { return StartDate; }
         public MyDate GetFinishDate() { return FinishDate; }
+
         public int GetTotalTime()
         {
             DateTime start = StartDate.ToDateTime();
             DateTime finish = FinishDate.ToDateTime();
-            TimeSpan timeSpan = finish - start;
-            return (int)timeSpan.TotalMinutes;
+            return (int)(finish - start).TotalMinutes;
         }
 
         public bool IsArrivingToday()
         {
-            return StartDate.GetYear() == FinishDate.GetYear() &&
-                   StartDate.GetMonth() == FinishDate.GetMonth() &&
-                   StartDate.GetDay() == FinishDate.GetDay();
+            DateTime start = StartDate.ToDateTime();
+            DateTime finish = FinishDate.ToDateTime();
+            return start.Date == finish.Date;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Sana04.Classes
         {
             Name = "Назва товару";
             Price = 0.0;
-            Cost = new Currency("UAH", 1.0);
+            Cost = new Currency();
             Quantity = 0;
             Producer = "Назва компанії-виробника";
             Weight = 0.0;
@@ -29,7 +29,7 @@ namespace Sana04.Classes
         {
             SetName(name);
             Price = price;
-            Cost = cost;
+            Cost = new Currency(cost);
             Quantity = quantity;
             Producer = producer;
             Weight = weight;
@@ -39,7 +39,7 @@ namespace Sana04.Classes
         {
             Name = other.Name;
             Price = other.Price;
-            Cost = new Currency(other.Cost.GetName(), other.Cost.GetExRate());
+            Cost = new Currency(other.Cost);
             Quantity = other.Quantity;
             Producer = other.Producer;
             Weight = other.Weight;
@@ -47,20 +47,12 @@ namespace Sana04.Classes
 
         public void SetName(string name)
         {
-            if (name == null || name.Length == 0)
-            {
+            if (string.IsNullOrEmpty(name))
                 throw new Exception("Name is empty!");
-            }
-            else
-            {
-                Name = name;
-            }
+            Name = name;
         }
 
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() { return Name; }
 
         public double GetPriceInUAH()
         {
